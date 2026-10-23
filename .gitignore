@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+
+# Development only, not needed by Obsidian or the theme store
+references/
+specs/
+showcase/
