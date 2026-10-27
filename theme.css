@@ -166,122 +166,139 @@ settings:
   -
     id: nb-canvas
     title: Background behind the boxes
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#b8e2b4'
+    default-light: '#b8e2b4'
+    default-dark: '#18221b'
   -
     id: nb-surface-editor
     title: Editor
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#fff8e8'
+    default-light: '#fff8e8'
+    default-dark: '#1f1d1b'
   -
     id: nb-surface-content
     title: Panels and modals
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#fdf1dc'
+    default-light: '#fdf1dc'
+    default-dark: '#262421'
   -
     id: nb-zone-left
     title: Left sidebar
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#f6b3a6'
+    default-light: '#f6b3a6'
+    default-dark: '#f6b3a6'
   -
     id: nb-zone-right
     title: Right sidebar
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#cdbbf0'
+    default-light: '#cdbbf0'
+    default-dark: '#cdbbf0'
   -
     id: nb-zone-tabs
     title: Tab bars
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#a8d4f2'
+    default-light: '#a8d4f2'
+    default-dark: '#a8d4f2'
   -
     id: nb-zone-ribbon
     title: Ribbon
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#f9c99a'
+    default-light: '#f9c99a'
+    default-dark: '#f9c99a'
   -
     id: nb-zone-status
     title: Status bar
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#fbe08a'
+    default-light: '#fbe08a'
+    default-dark: '#fbe08a'
   -
     id: nb-accent
     title: Accent
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#fbe08a'
+    default-light: '#fbe08a'
+    default-dark: '#fbe08a'
   -
     id: nb-border-color
-    title: Borders
-    type: variable-color
+    title: Borders (outside the zones in dark mode)
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#1b1b1f'
+    default-light: '#1b1b1f'
+    default-dark: '#fbe08a'
   -
     id: nb-shadow-color
-    title: Shadows
-    type: variable-color
+    title: Shadows (outside the zones in dark mode)
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#1b1b1f'
+    default-light: '#1b1b1f'
+    default-dark: '#fbe08a'
   -
     id: nb-dots-color
     title: Dots
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: true
-    default: '#1b1b1f40'
+    default-light: '#1b1b1f40'
+    default-dark: '#b8e2b438'
   -
     id: nb-tag-color
     title: Tags
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#a9e6d6'
+    default-light: '#a9e6d6'
+    default-dark: '#a9e6d6'
   -
     id: nb-h1-marker
     title: Heading 1 marker
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#fbe08a'
+    default-light: '#fbe08a'
+    default-dark: '#8d7d4d'
   -
     id: nb-h2-marker
     title: Heading 2 marker
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#f5bcdc'
+    default-light: '#f5bcdc'
+    default-dark: '#8a5f72'
   -
     id: nb-folder-color
     title: Folder icons
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#fbe08a'
+    default-light: '#fbe08a'
+    default-dark: '#fbe08a'
   -
     id: nb-folder-open-color
     title: Open folder icons
-    type: variable-color
+    type: variable-themed-color
     format: hex
     opacity: false
-    default: '#fbe08a'
+    default-light: '#fbe08a'
+    default-dark: '#fbe08a'
   -
     id: nb-typography
     title: Typography
@@ -382,6 +399,11 @@ body {
     --nb-zone-ribbon: var(--nb-color-orange);
     --nb-zone-status: var(--nb-color-yellow);
 
+    /* Bars (tab bars, vault profile) use their zone color. The amount and
+       base let dark mode turn this into a tint (03b). */
+    --nb-zone-bg-amount: 100%;
+    --nb-zone-bg-base: var(--nb-surface-content);
+
     /* Sidebar content is a lighter tint of its zone color */
     --nb-zone-tint-amount: 40%;
     --nb-zone-tint-base: var(--nb-color-white);
@@ -391,7 +413,15 @@ body {
     --nb-text: var(--nb-color-ink);
     --nb-text-muted: color-mix(in srgb, var(--nb-color-ink) 70%, transparent);
     --nb-text-faint: color-mix(in srgb, var(--nb-color-ink) 50%, transparent);
+    /* Pastel fills ("stickers": active tab, tags, callout titles, buttons...)
+       always get ink text and an ink outline, also in dark mode */
+    --nb-on-pastel: var(--nb-color-ink);
+    --nb-sticker-border-color: var(--nb-color-ink);
+    /* Fill of colored canvas cards: share of the canvas color */
+    --nb-canvas-fill-amount: 70%;
     --nb-selection: color-mix(in srgb, var(--nb-color-yellow) 60%, transparent);
+    /* Base for thin lines, guides and faint tints (ink in light mode) */
+    --nb-line-ink: var(--nb-color-ink);
     --nb-hover: color-mix(in srgb, var(--nb-color-ink) 8%, transparent);
     --nb-cover: color-mix(in srgb, var(--nb-color-ink) 25%, transparent);
     --nb-error: var(--nb-color-red-strong);
@@ -456,8 +486,8 @@ body {
     --nb-syntax-value: #a8481a;
     --nb-syntax-tag: #b0303f;
     --nb-syntax-property: #16766a;
-    --nb-syntax-comment: color-mix(in srgb, var(--nb-color-ink) 62%, var(--nb-code-background));
-    --nb-syntax-punctuation: color-mix(in srgb, var(--nb-color-ink) 75%, var(--nb-code-background));
+    --nb-syntax-comment: color-mix(in srgb, var(--nb-line-ink) 62%, var(--nb-code-background));
+    --nb-syntax-punctuation: color-mix(in srgb, var(--nb-line-ink) 75%, var(--nb-code-background));
 
     /* File explorer tree lines (C-20a) */
     --nb-tree-line-width: 1.5px;
@@ -472,10 +502,11 @@ body {
        the tokens below. */
     --nb-folder-color: var(--nb-color-yellow);
     --nb-folder-open-color: var(--nb-color-yellow);
-    --nb-folder-line-color: var(--nb-border-color);
+    /* Folder icons are small stickers: pastel fill, ink outline */
+    --nb-folder-line-color: var(--nb-sticker-border-color);
     --nb-icon-folder-fill: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 4.5A1.5 1.5 0 0 1 2.5 3h3.4c.5 0 .95.24 1.24.64l.82 1.12c.29.4.74.64 1.24.64H13.5A1.5 1.5 0 0 1 15 6.9v5.6a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z'/%3E%3C/svg%3E");
     --nb-icon-folder-line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 4.5A1.5 1.5 0 0 1 2.5 3h3.4c.5 0 .95.24 1.24.64l.82 1.12c.29.4.74.64 1.24.64H13.5A1.5 1.5 0 0 1 15 6.9v5.6a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z'/%3E%3C/svg%3E");
-    --nb-icon-folder-open-fill: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1.2 14l1.7-5.1A1.3 1.3 0 0 1 4.1 8h9.9a1 1 0 0 1 .95 1.3l-1.4 3.9A1.3 1.3 0 0 1 12.3 14z'/%3E%3C/svg%3E");
+    --nb-icon-folder-open-fill: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 4.5A1.5 1.5 0 0 1 2.5 3h3.4c.5 0 .95.24 1.24.64l.82 1.12c.29.4.74.64 1.24.64H12A1.5 1.5 0 0 1 13.5 6.9V8H4.1A1.3 1.3 0 0 0 2.9 8.9L1.2 14H1z'/%3E%3Cpath d='M1.2 14l1.7-5.1A1.3 1.3 0 0 1 4.1 8h9.9a1 1 0 0 1 .95 1.3l-1.4 3.9A1.3 1.3 0 0 1 12.3 14z'/%3E%3C/svg%3E");
     --nb-icon-folder-open-line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cg fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12.5V4.5A1.5 1.5 0 0 1 2.5 3h3.4c.5 0 .95.24 1.24.64l.82 1.12c.29.4.74.64 1.24.64H12A1.5 1.5 0 0 1 13.5 6.9v.6'/%3E%3Cpath d='M1.2 14l1.7-5.1A1.3 1.3 0 0 1 4.1 8h9.9a1 1 0 0 1 .95 1.3l-1.4 3.9A1.3 1.3 0 0 1 12.3 14z'/%3E%3C/g%3E%3C/svg%3E");
 
     /* Dot grid (T-8) */
@@ -540,7 +571,7 @@ body.is-mobile.theme-dark {
     --color-base-70: #57524a;
     --color-base-100: var(--nb-color-ink);
 
-    --background-modifier-box-shadow: color-mix(in srgb, var(--nb-color-ink) 10%, transparent);
+    --background-modifier-box-shadow: color-mix(in srgb, var(--nb-line-ink) 10%, transparent);
     --background-modifier-cover: var(--nb-cover);
     --input-shadow: none;
     --input-shadow-hover: none;
@@ -601,8 +632,8 @@ body.is-mobile.theme-dark {
     --titlebar-background: transparent;
     --titlebar-background-focused: transparent;
     --titlebar-border-width: 0;
-    --ribbon-background: var(--nb-zone-ribbon);
-    --ribbon-background-collapsed: var(--nb-zone-ribbon);
+    --ribbon-background: color-mix(in srgb, var(--nb-zone-ribbon) var(--nb-zone-bg-amount), var(--nb-zone-bg-base));
+    --ribbon-background-collapsed: color-mix(in srgb, var(--nb-zone-ribbon) var(--nb-zone-bg-amount), var(--nb-zone-bg-base));
     --tab-outline-color: var(--nb-border-color);
     --tab-outline-width: var(--nb-border-width);
     --tab-text-color: var(--nb-text-muted);
@@ -610,7 +641,7 @@ body.is-mobile.theme-dark {
     --tab-text-color-active: var(--nb-text);
     --tab-text-color-focused-active: var(--nb-text);
     --tab-text-color-focused-active-current: var(--nb-text);
-    --status-bar-background: var(--nb-zone-status);
+    --status-bar-background: color-mix(in srgb, var(--nb-zone-status) var(--nb-zone-bg-amount), var(--nb-zone-bg-base));
     --status-bar-border-color: var(--nb-border-color);
     --status-bar-border-width: var(--nb-border-width);
     --status-bar-radius: var(--nb-radius-small);
@@ -622,7 +653,7 @@ body.is-mobile.theme-dark {
     --toggle-radius: var(--nb-radius-pill);
     --toggle-thumb-radius: var(--nb-radius-pill);
     --toggle-thumb-color: var(--nb-surface-input);
-    --slider-track-background: color-mix(in srgb, var(--nb-color-ink) 15%, transparent);
+    --slider-track-background: color-mix(in srgb, var(--nb-line-ink) 15%, transparent);
     --slider-track-height: 6px;
     --slider-thumb-border-width: var(--nb-border-width);
     --slider-thumb-border-color: var(--nb-border-color);
@@ -637,12 +668,12 @@ body.is-mobile.theme-dark {
     --background-modifier-message: var(--nb-color-ink);
 
     /* Graph view (C-22). Obsidian reads these colors when it draws. */
-    --graph-node: var(--nb-color-ink);
-    --graph-node-unresolved: color-mix(in srgb, var(--nb-color-ink) 35%, transparent);
+    --graph-node: var(--nb-text);
+    --graph-node-unresolved: color-mix(in srgb, var(--nb-line-ink) 35%, transparent);
     --graph-node-focused: var(--nb-color-orange-strong);
     --graph-node-tag: var(--nb-color-mint-strong);
     --graph-node-attachment: var(--nb-color-lilac-strong);
-    --graph-line: color-mix(in srgb, var(--nb-color-ink) 35%, transparent);
+    --graph-line: color-mix(in srgb, var(--nb-line-ink) 35%, transparent);
     --graph-text: var(--nb-text);
 
     /* Settings groups (C-29), new in Obsidian 1.14 */
@@ -651,7 +682,7 @@ body.is-mobile.theme-dark {
     --setting-items-border-color: var(--nb-border-color);
     --setting-items-radius: var(--nb-radius-small);
     --setting-items-divider-width: 1px;
-    --setting-items-divider-color: color-mix(in srgb, var(--nb-color-ink) 18%, transparent);
+    --setting-items-divider-color: color-mix(in srgb, var(--nb-line-ink) 18%, transparent);
 
     /* Modals */
     --modal-background: var(--nb-surface-content);
@@ -689,7 +720,7 @@ body.is-mobile.theme-dark {
     --list-marker-color-collapsed: var(--nb-color-orange-strong);
     --list-bullet-size: 6px;
     --list-bullet-radius: 1px;
-    --indentation-guide-color: color-mix(in srgb, var(--nb-color-ink) 25%, transparent);
+    --indentation-guide-color: color-mix(in srgb, var(--nb-line-ink) 25%, transparent);
     --indentation-guide-color-active: var(--nb-text);
     --checkbox-size: 16px;
     --checkbox-radius: 4px;
@@ -697,14 +728,14 @@ body.is-mobile.theme-dark {
     --checkbox-color-hover: var(--nb-color-yellow-strong);
     --checkbox-border-color: var(--nb-border-color);
     --checkbox-border-color-hover: var(--nb-border-color);
-    --checkbox-marker-color: var(--nb-text);
+    --checkbox-marker-color: var(--nb-on-pastel);
     --checklist-done-decoration: line-through;
     --checklist-done-color: var(--nb-text-muted);
 
     /* Blockquotes (C-10) */
     --blockquote-border-thickness: calc(var(--nb-border-width) * 2);
     --blockquote-border-color: var(--nb-border-color);
-    --blockquote-background-color: color-mix(in srgb, var(--nb-color-ink) 4%, transparent);
+    --blockquote-background-color: color-mix(in srgb, var(--nb-line-ink) 4%, transparent);
     --blockquote-color: var(--nb-text);
 
     /* Code (C-12) */
@@ -778,7 +809,7 @@ body.is-mobile.theme-dark {
     --callout-padding: 0;
     --callout-radius: var(--nb-radius-small);
     --callout-blend-mode: normal;
-    --callout-title-color: var(--nb-text);
+    --callout-title-color: var(--nb-on-pastel);
     --callout-title-weight: 700;
     --callout-default: var(--nb-rgb-blue);
     --callout-info: var(--nb-rgb-blue);
@@ -818,6 +849,102 @@ body.is-mobile.theme-dark {
     --h4-weight: 700;
     --h5-weight: 700;
     --h6-weight: 700;
+}
+
+
+/* == 03b DARK MODE ========================================================
+   "Stickers at night": the large surfaces turn dark, everything colorful
+   stays pastel. Pastel fills (stickers) keep ink text and ink outlines.
+   Dark boxes and their contents get outlines and hard shadows in the
+   color of their area: left sidebar red, main area blue, right sidebar
+   lilac, ribbon orange, status bar and floating UI yellow.
+   Only tokens change here; the components are the same as in light mode.
+   ".is-mobile.theme-dark" is listed because Obsidian uses that selector for
+   its own dark phone colors.
+   ========================================================================== */
+
+body.theme-dark,
+body.is-mobile.theme-dark {
+    color-scheme: dark;
+
+    /* Surfaces */
+    --nb-canvas: #18221b;
+    --nb-surface-editor: #1f1d1b;
+    --nb-surface-content: #262421;
+    --nb-surface-input: #2d2b27;
+    --nb-dots-color: color-mix(in srgb, var(--nb-color-green) 22%, transparent);
+
+    /* Bars and sidebar contents are tints of their zone color */
+    --nb-zone-bg-amount: 24%;
+    --nb-zone-bg-base: var(--nb-surface-content);
+    --nb-zone-tint-amount: 9%;
+    --nb-zone-tint-base: var(--nb-surface-content);
+
+    /* Text on dark surfaces; text on pastel stays ink (--nb-on-pastel) */
+    --nb-text: #f3ecdd;
+    --nb-text-muted: color-mix(in srgb, #f3ecdd 72%, transparent);
+    --nb-text-faint: color-mix(in srgb, #f3ecdd 50%, transparent);
+    --nb-hover: color-mix(in srgb, #f3ecdd 9%, transparent);
+    --nb-selection: color-mix(in srgb, var(--nb-color-yellow) 35%, transparent);
+    --nb-cover: color-mix(in srgb, black 55%, transparent);
+    --nb-line-ink: #f3ecdd;
+
+    /* Outlines and shadows outside any area (modals, menus, popovers) */
+    --nb-border-color: var(--nb-color-yellow);
+    --nb-shadow-color: var(--nb-color-yellow);
+
+    /* Softer heading markers behind light text */
+    --nb-h1-marker: color-mix(in srgb, var(--nb-color-yellow) 45%, var(--nb-surface-editor));
+    --nb-h2-marker: color-mix(in srgb, var(--nb-color-pink) 45%, var(--nb-surface-editor));
+
+    /* Colored canvas cards: a tint, so their light text stays readable */
+    --nb-canvas-fill-amount: 28%;
+
+    /* Syntax colors for the dark code background (T-3) */
+    --nb-syntax-keyword: #c3a6f2;
+    --nb-syntax-string: #9ed69a;
+    --nb-syntax-function: #8cc3ef;
+    --nb-syntax-value: #efb07c;
+    --nb-syntax-tag: #f0a0ac;
+    --nb-syntax-property: #84d5c3;
+
+    /* Obsidian's base scale and color scheme */
+    --highlight-mix-blend-mode: lighten;
+    --mono-0: black;
+    --mono-100: white;
+    --mono-rgb-0: 0, 0, 0;
+    --mono-rgb-100: 255, 255, 255;
+    --color-base-00: #15130f;
+    --color-base-05: #1a1816;
+    --color-base-10: #1f1d1b;
+    --color-base-20: #262421;
+    --color-base-25: #2d2b27;
+    --color-base-30: #36332f;
+    --color-base-35: #403c37;
+    --color-base-40: #5a554d;
+    --color-base-50: #726b60;
+    --color-base-60: #a69d8b;
+    --color-base-70: #c9bfac;
+    --color-base-100: #f3ecdd;
+}
+
+/* Each area outlines and shadows its boxes and contents in its own color */
+body.theme-dark .workspace-split.mod-root,
+body.theme-dark .workspace-split.mod-left-split,
+body.theme-dark .workspace-split.mod-right-split,
+body.theme-dark .workspace-drawer {
+    --nb-border-color: var(--nb-zone);
+    --nb-shadow-color: var(--nb-zone);
+}
+
+body.theme-dark .workspace-ribbon.mod-primary {
+    --nb-border-color: var(--nb-zone-ribbon);
+    --nb-shadow-color: var(--nb-zone-ribbon);
+}
+
+body.theme-dark .status-bar {
+    --nb-border-color: var(--nb-zone-status);
+    --nb-shadow-color: var(--nb-zone-status);
 }
 
 
@@ -894,6 +1021,99 @@ body,
    no :first-child on workspace elements.
    ========================================================================== */
 
+/* L-2b Derived tokens per area. Custom properties are computed where they
+   are declared and then inherited as finished values, so composite tokens
+   (--nb-border, --nb-shadow) and Obsidian's border variables are declared
+   again wherever the border or shadow color changes: in each workspace
+   area, in floating UI and on stickers. In light mode every area uses ink,
+   so nothing changes there; dark mode gives each area its own color (03b). */
+.workspace-split,
+.workspace-drawer,
+.workspace-ribbon,
+.status-bar,
+.modal-container,
+.menu,
+.popover,
+.prompt,
+.suggestion-container,
+.notice {
+    --nb-border: var(--nb-border-width) solid var(--nb-border-color);
+    --nb-shadow: var(--nb-shadow-offset) var(--nb-shadow-offset) 0 var(--nb-shadow-color);
+    --nb-shadow-small: var(--nb-shadow-offset-small) var(--nb-shadow-offset-small) 0 var(--nb-shadow-color);
+    --nb-shadow-small-hover: calc(var(--nb-shadow-offset-small) + 1px) calc(var(--nb-shadow-offset-small) + 1px) 0 var(--nb-shadow-color);
+    --nb-shadow-modal: calc(var(--nb-shadow-offset) * 1.5) calc(var(--nb-shadow-offset) * 1.5) 0 var(--nb-shadow-color);
+    --background-modifier-border: var(--nb-border-color);
+    --background-modifier-border-hover: var(--nb-border-color);
+    --background-modifier-border-focus: var(--nb-border-color);
+    --divider-color: var(--nb-border-color);
+    --tab-outline-color: var(--nb-border-color);
+    --table-border-color: var(--nb-border-color);
+    --hr-color: var(--nb-border-color);
+    --blockquote-border-color: var(--nb-border-color);
+    --metadata-border-color: var(--nb-border-color);
+    --checkbox-border-color: var(--nb-border-color);
+    --checkbox-border-color-hover: var(--nb-border-color);
+    --pill-border-color: var(--nb-border-color);
+    --pill-border-color-hover: var(--nb-border-color);
+    --setting-items-border-color: var(--nb-border-color);
+    --modal-border-color: var(--nb-border-color);
+    --prompt-border-color: var(--nb-border-color);
+    --menu-border-color: var(--nb-border-color);
+    --nb-tree-line-color: var(--nb-border-color);
+    --raised-shadow: var(--nb-shadow-small);
+}
+
+/* L-2c Stickers: pastel fills keep an ink outline and ink text in both
+   modes. Their shadow keeps the color of the area around them. */
+.workspace-tab-header-container .workspace-tab-header.is-active,
+.clickable-icon.is-active,
+button.mod-cta,
+button.mod-warning,
+body:not(.is-phone) .vertical-tab-nav-item.is-active,
+.suggestion-item.is-selected,
+.menu-item.selected:not(.is-disabled):not(.is-label),
+.menu-item:hover:not(.is-disabled):not(.is-label),
+.notice,
+.canvas-group-label,
+.callout-title,
+.markdown-rendered mark,
+.markdown-source-view mark,
+.markdown-source-view .cm-highlight,
+.cm-searchMatch,
+.search-result-file-matched-text,
+.markdown-rendered .footnote-link,
+.markdown-rendered a.tag,
+.markdown-source-view .cm-hashtag,
+.metadata-property[data-property-key="tags"] .multi-select-pill,
+[data-property-type="tags"] .multi-select-pill,
+.markdown-rendered th,
+.markdown-source-view .cm-table-widget th,
+.bases-thead,
+.markdown-rendered a.internal-link:hover,
+.markdown-rendered a.external-link:hover,
+.markdown-source-view .cm-hmd-internal-link:hover,
+.markdown-source-view .cm-link:hover,
+.markdown-source-view .cm-url:hover {
+    --nb-border-color: var(--nb-sticker-border-color);
+    --nb-border: var(--nb-border-width) solid var(--nb-sticker-border-color);
+    --tag-border-color: var(--nb-sticker-border-color);
+    --tag-border-color-hover: var(--nb-sticker-border-color);
+    --pill-border-color: var(--nb-sticker-border-color);
+    --nb-text: var(--nb-on-pastel);
+    --text-normal: var(--nb-on-pastel);
+    --text-muted: color-mix(in srgb, var(--nb-on-pastel) 75%, transparent);
+    --icon-color: var(--nb-on-pastel);
+    --icon-color-hover: var(--nb-on-pastel);
+    --tag-color: var(--nb-on-pastel);
+    --tag-color-hover: var(--nb-on-pastel);
+    --link-color: var(--nb-on-pastel);
+    --link-color-hover: var(--nb-on-pastel);
+    --tab-text-color-focused-active-current: var(--nb-on-pastel);
+    --tab-text-color-focused-active: var(--nb-on-pastel);
+    --tab-text-color-active: var(--nb-on-pastel);
+    color: var(--nb-on-pastel);
+}
+
 /* L-2 Color zones: each container defines its zone, boxes inside use it */
 .workspace-split.mod-root {
     --nb-zone: var(--nb-zone-tabs);
@@ -906,6 +1126,12 @@ body,
 
 .workspace-split.mod-right-split {
     --nb-zone: var(--nb-zone-right);
+}
+
+/* Bars use a mix of the zone color (100 % in light mode, a tint in dark mode) */
+.workspace-split,
+.workspace-drawer {
+    --nb-zone-bg: color-mix(in srgb, var(--nb-zone) var(--nb-zone-bg-amount), var(--nb-zone-bg-base));
 }
 
 .workspace-split.mod-sidedock {
@@ -958,8 +1184,8 @@ body:not(.is-mobile) .workspace-sidedock-vault-profile {
 }
 
 .workspace-tabs .workspace-tab-header-container {
-    --tab-container-background: var(--nb-zone);
-    background-color: var(--nb-zone);
+    --tab-container-background: var(--nb-zone-bg);
+    background-color: var(--nb-zone-bg);
 }
 
 .workspace-sidedock-vault-profile {
@@ -967,7 +1193,7 @@ body:not(.is-mobile) .workspace-sidedock-vault-profile {
        translucent mode where Obsidian makes the divider light gray */
     --divider-color: var(--nb-border-color);
     --divider-width: var(--nb-border-width);
-    background-color: var(--nb-zone);
+    background-color: var(--nb-zone-bg);
 }
 
 .workspace-tab-container,
@@ -983,7 +1209,7 @@ body:not(.is-mobile) .workspace-sidedock-vault-profile {
 /* L-5 Ribbon (Obsidian calls the left ribbon "primary") */
 body:not(.is-mobile) .workspace-ribbon.mod-primary {
     margin-block-start: 0;
-    background-color: var(--nb-zone-ribbon);
+    background-color: var(--ribbon-background);
 }
 
 /* Obsidian reserves a titlebar slot above the ribbon; the canvas strip does that job */
@@ -1099,6 +1325,13 @@ body .workspace-tabs .workspace-tab-header-container .workspace-tab-header-conta
     --nb-marker: var(--nb-h2-marker);
 }
 
+/* Editor headings are inline spans; without "clone" a span that wraps gets
+   one band across all its lines, cut into pieces at random heights */
+.markdown-source-view :is(.cm-header-1, .cm-header-2):not(.cm-formatting) {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
 .markdown-rendered :is(h1, h2),
 .inline-title {
     width: fit-content;
@@ -1131,8 +1364,10 @@ input[type="checkbox"] {
     box-shadow: var(--nb-shadow-small);
 }
 
+/* A checked box is a sticker: pastel fill, ink outline, ink check mark */
 input[type="checkbox"]:checked {
     background-color: var(--checkbox-color);
+    border-color: var(--nb-sticker-border-color);
 }
 
 /* C-10 Blockquotes */
@@ -1348,11 +1583,6 @@ input[type="checkbox"]:checked {
 }
 
 
-/* C-18 Mermaid: Obsidian inverts diagrams in dark mode; the theme is light (A-5) */
-body.theme-dark .mermaid > svg {
-    filter: none;
-}
-
 /* Keyboard keys */
 kbd {
     background-color: var(--nb-surface-input);
@@ -1495,7 +1725,7 @@ kbd {
    mod-canvas-color class) keep Obsidian's own tint. */
 .canvas-wrapper {
     --canvas-background: var(--nb-surface-editor);
-    --canvas-dot-pattern: color-mix(in srgb, var(--nb-color-ink) 25%, transparent);
+    --canvas-dot-pattern: color-mix(in srgb, var(--nb-line-ink) 25%, transparent);
 }
 
 .canvas-node-container {
@@ -1509,7 +1739,7 @@ kbd {
 }
 
 .canvas-node.is-themed[class*="mod-canvas-color-"] .canvas-node-content {
-    background-color: color-mix(in srgb, var(--nb-canvas-fill) 70%, var(--nb-surface-editor));
+    background-color: color-mix(in srgb, var(--nb-canvas-fill) var(--nb-canvas-fill-amount), var(--nb-surface-editor));
 }
 
 .mod-canvas-color-1 {
@@ -1595,8 +1825,8 @@ kbd {
     background-color: var(--table-header-background);
 }
 
-.bases-thead .bases-table-header {
-    color: var(--nb-text);
+.bases-thead :is(.bases-table-header, .bases-table-header-label) {
+    color: var(--nb-on-pastel);
     font-weight: 700;
 }
 
@@ -1608,8 +1838,10 @@ kbd {
     overflow: hidden;
 }
 
-/* C-22 Graph view: the controls panel is a box */
-.graph-controls {
+/* C-22 Graph view: the controls panel is a box. ":not(.is-close)" matches
+   the specificity of Obsidian's own border rule for the open panel. */
+.graph-controls,
+.graph-controls:not(.is-close) {
     border: var(--nb-border);
     border-radius: var(--nb-radius-small);
     box-shadow: var(--nb-shadow-small);
@@ -1817,6 +2049,11 @@ body:not(.is-phone) .vertical-tab-nav-item.is-active {
     color: var(--nb-text);
 }
 
+/* Hotkey chips on the selected (pastel) row stay light in both modes */
+.suggestion-item.is-selected .suggestion-hotkey > span {
+    background-color: var(--nb-color-white);
+}
+
 /* C-31 Menus and context menus */
 .menu {
     border: var(--nb-border);
@@ -1832,7 +2069,7 @@ body:not(.is-phone) .vertical-tab-nav-item.is-active {
 }
 
 .menu-separator {
-    border-bottom: 1px solid color-mix(in srgb, var(--nb-color-ink) 18%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--nb-line-ink) 18%, transparent);
 }
 
 /* C-32 Tooltips: ink box with light text */
@@ -1951,7 +2188,7 @@ body.is-phone {
 }
 
 .workspace-drawer-ribbon {
-    background-color: var(--nb-zone-ribbon);
+    background-color: var(--ribbon-background);
     border-inline-end: var(--nb-border);
 }
 
@@ -2001,11 +2238,11 @@ body.is-translucent:not(.is-fullscreen) .workspace-tabs {
 
 body.is-translucent:not(.is-fullscreen) .workspace-tabs .workspace-tab-header-container,
 body.is-translucent:not(.is-fullscreen) .workspace-sidedock-vault-profile {
-    background-image: linear-gradient(var(--nb-zone), var(--nb-zone));
+    background-image: linear-gradient(var(--nb-zone-bg), var(--nb-zone-bg));
 }
 
 body.is-translucent:not(.is-fullscreen) .workspace-ribbon.mod-primary {
-    background-image: linear-gradient(var(--nb-zone-ribbon), var(--nb-zone-ribbon));
+    background-image: linear-gradient(var(--ribbon-background), var(--ribbon-background));
 }
 
 body.is-translucent:not(.is-fullscreen) .workspace-leaf-content[data-type="markdown"] {

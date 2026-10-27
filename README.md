@@ -9,6 +9,7 @@ Welcome to the **Neobrutalism Theme**, a colorful and cozy theme for Obsidian. P
 - **Everything styled**: Callouts, tables, code blocks, tags, checkboxes, properties, embeds, footnotes, settings, command palette, menus, Canvas, Graph view and Bases.
 - **Connected file tree**: Tree lines like in LazyVim and simple folder icons that open and close.
 - **Fonts included**: Unbounded for headings, Outfit for text and JetBrains Mono for code, embedded in the theme. Nothing is loaded from the internet.
+- **Light and dark mode**: In dark mode the surfaces turn dark while the pastel stickers stay bright, and every area gets outlines and shadows in its own color.
 - **Desktop and mobile**: Works on macOS, Windows, Linux, iOS and Android.
 - **Customizable**: Gaps, borders, shadows, corner radius, colors, fonts and more with the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin. Every value is also a CSS variable at the top of `theme.css`.
 
@@ -23,12 +24,11 @@ Install the Style Settings plugin and open its settings tab to adjust:
 - **Layout**: gap between boxes, gap on phones, tab bar height, hide the status bar
 - **Shape**: border width, shadow offset, corner radius, hover movement, image borders, tree lines
 - **Background**: dot grid on or off, dot size and spacing
-- **Colors**: background, editor, panels, each sidebar, tab bars, ribbon, status bar, accent, borders, shadows, tags, heading markers, folder icons
+- **Colors** (separately for light and dark mode): background, editor, panels, each sidebar, tab bars, ribbon, status bar, accent, borders, shadows, tags, heading markers, folder icons
 - **Typography**: heading font, text font, heading markers on or off
 
 ## Notes
 
-- Obsidian's dark mode is not supported yet. When Obsidian runs in dark mode, the theme stays light. A dark version is planned.
 - On macOS, Obsidian uses native context menus by default. They are drawn by the system and cannot be themed. Turn off "Native menus" in Obsidian's settings to get the themed menus.
 - Folder icon outlines are always 2px, also when you change the border width.
 
