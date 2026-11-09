@@ -42,7 +42,11 @@ The theme embeds these fonts (Latin subset). All of them are licensed under the 
 
 ## Troubleshooting
 
-If your issue isn't listed here, feel free to open an issue in the repository, and I'll do my best to assist!
+If your issue isn't listed here, feel free to [open an issue](https://github.com/LennZone/Neobrutalism/issues/new/choose), and I'll do my best to assist!
+
+## Contributing
+
+Contributions are welcome. Please read the [contributing guide](CONTRIBUTING.md) and the [code of conduct](CODE_OF_CONDUCT.md) first.
 
 ## License
 
